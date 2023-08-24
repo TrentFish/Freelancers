@@ -2,6 +2,7 @@ const container = document.querySelector('.container');
 const nameList = document.querySelector('.name');
 const priceList = document.querySelector('.price');
 const jobList = document.querySelector('.job');
+const average = document.querySelector('.average');
 
 const names = [
     "PeePee",
@@ -26,7 +27,7 @@ const names = [
     "Daisy"
   ];
   
-  const occupations = [
+const occupations = [
     "gardener",
     "programmer",
     "teacher",
@@ -39,5 +40,44 @@ const names = [
     "janitor"
   ];
 
-  console.log(names);
-  console.log(occupations);
+function randomFreelancer(){
+    const nameIdx = Math.floor(Math.random()*names.length);
+    const occupationIdx = Math.floor(Math.random()*occupations.length);
+    const price = Math.ceil(Math.random()*100);
+    const freelancer = {
+      name: names[nameIdx],
+      occupation: occupations[occupationIdx],
+      startingPrice: price
+    };
+    return freelancer;
+  }
+  
+const freelancers = [
+    randomFreelancer(),
+    randomFreelancer()
+  ];
+
+  function render(){
+    const html = freelancers.map(function(freelancer){
+      return `
+        <div class="name"><ul><li>${freelancer.name}</li></ul></div>
+        <div class="job"><ul><li>${freelancer.occupation}</ul></div>
+        <div class="price"><ul><li>$${freelancer.startingPrice}</ul></div>`;
+    });
+    container.innerHTML = html.join('');
+  }
+
+  function rendAvg(){
+    
+    const html = freelancers.map(function(freelancer){
+        return `The current average starting price is good`
+      });
+      average.innerHTML = html.join('');
+  }
+
+render();
+setInterval(function(){
+    const newFreelancer = randomFreelancer();
+    freelancers.push(newFreelancer);
+    render();
+  }, 5000);
