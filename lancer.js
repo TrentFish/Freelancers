@@ -66,15 +66,7 @@ const freelancers = [
     });
     container.innerHTML = html.join('');
   }
-
-  function rendAvg(){
-    
-    const html = freelancers.map(function(freelancer){
-        return `The current average starting price is good`
-      });
-      average.innerHTML = html.join('');
-  }
-
+  
 render();
 setInterval(function(){
     const newFreelancer = randomFreelancer();
